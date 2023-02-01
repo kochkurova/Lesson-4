@@ -11,9 +11,9 @@ public class Lesson4 {
         Configuration.baseUrl = "https://demoqa.com";
     }
     @Test
-    void Homework() {
+    void homework() {
         // переменные
-        String firstName, lastName, userEmail, userNumber, currentAddress, subjectsInput, state, city;
+        String firstName, lastName, userEmail, userNumber, currentAddress, subjectsInput, state, city, hobbies, gender, picturename;
         firstName = "Elena";
         lastName = "Semenova";
         userEmail = "kochkurova.en@gmail.com";
@@ -22,6 +22,9 @@ public class Lesson4 {
         subjectsInput = "English";
         state = "Haryana";
         city = "Karnal";
+        hobbies = "Music";
+        gender = "Female";
+        picturename = "fdf.jpg";
 
         /* Разработайте один автотест на проверку формы
         https://demoqa.com/automation-practice-form */
@@ -33,9 +36,9 @@ public class Lesson4 {
         $("#userEmail").setValue(userEmail);
         $("#userNumber").setValue(userNumber);
         $("#currentAddress").setValue(currentAddress);
-        $("[for=gender-radio-2]").click();
+        $("#genterWrapper").$(byText(gender)).click();
         $("#subjectsInput").setValue(subjectsInput).pressEnter();
-        $("[for=hobbies-checkbox-3]").click();
+        $("#hobbiesWrapper").$(byText(hobbies)).click();
         $("#react-select-3-input").setValue(state).pressEnter();
         $("#react-select-4-input").setValue(city).pressEnter();
         $("#dateOfBirthInput").click();
@@ -45,10 +48,11 @@ public class Lesson4 {
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month").$$(".react-datepicker__week").get(4)
                 .$(byText("30")).click();
-        $("#submit").pressEnter();
 
         // вставить фото
-        $("#uploadPicture").uploadFromClasspath("fdf.jpg");
+        $("#uploadPicture").uploadFromClasspath(picturename);
+        $("#submit").pressEnter();
+
 
         // Проверка
         $(".modal-body").$(byText("Student Name")).sibling(0)
@@ -56,7 +60,7 @@ public class Lesson4 {
         $(".modal-body").$(byText("Student Email")).sibling(0)
                 .shouldHave(text(userEmail));
         $(".modal-body").$(byText("Gender")).sibling(0)
-                .shouldHave(text("Female"));
+                .shouldHave(text(gender));
         $(".modal-body").$(byText("Mobile")).sibling(0)
                 .shouldHave(text(userNumber));
         $(".modal-body").$(byText("Date of Birth")).sibling(0)
@@ -64,9 +68,9 @@ public class Lesson4 {
         $(".modal-body").$(byText("Subjects")).sibling(0)
                 .shouldHave(text(subjectsInput));
         $(".modal-body").$(byText("Hobbies")).sibling(0)
-                .shouldHave(text("Music"));
+                .shouldHave(text(hobbies));
         $(".modal-body").$(byText("Picture")).sibling(0)
-                .shouldHave(text("fdf.jpg"));
+                .shouldHave(text(picturename));
         $(".modal-body").$(byText("Address")).sibling(0)
                 .shouldHave(text(currentAddress));
         $(".modal-body").$(byText("State and City")).sibling(0)

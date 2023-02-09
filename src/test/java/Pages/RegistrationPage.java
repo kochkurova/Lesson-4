@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -10,7 +10,6 @@ public class RegistrationPage {
     public RegistrationPage openPage () {
         open("/automation-practice-form");
         $(".practice-form-wrapper h5").shouldHave(text(titleText));
-
         return this;
     }
 
@@ -70,9 +69,9 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkData (String x, String y) {
-        $(".modal-body").$(byText(x)).sibling(0)
-                .shouldHave(text(y));
+    public RegistrationPage checkData (String firstColumn, String secondColumn) {
+        $(".modal-body").$(byText(firstColumn)).sibling(0)
+                .shouldHave(text(secondColumn));
         return this;
 
     }
@@ -82,13 +81,13 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setBirthDate (String x, String y, String z) {
-        String day = ".react-datepicker__day--0" + z;
+    public RegistrationPage setBirthDate (String month, String year, String dayInput) {
+        String day = ".react-datepicker__day--0" + dayInput;
         $(".react-datepicker__input-container").click();
         $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption(x);
+        $(".react-datepicker__month-select").selectOption(month);
         $(".react-datepicker__year-select").click();
-        $(".react-datepicker__year-select").selectOption(y);
+        $(".react-datepicker__year-select").selectOption(year);
         $(".react-datepicker__month")
                 .$(day + ":not(.react-datepicker__day--outside-month)").click();
         return this;
